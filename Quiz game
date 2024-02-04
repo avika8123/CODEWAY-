@@ -1,0 +1,60 @@
+ Here's a python code gor quiz game.
+import random
+
+def load_quiz_questions():
+    # Define quiz questions and answers
+    questions = [
+        {"question": "What is the capital of France?", "choices": ["A. Berlin", "B. Madrid", "C. Paris"], "correct_answer": "C"},
+        {"question": "Which planet is known as the Red Planet?", "choices": ["A. Venus", "B. Mars", "C. Jupiter"], "correct_answer": "B"},
+        # Add more questions here
+    ]
+    return questions
+
+def display_welcome_message():
+    print("Welcome to the Quiz Game!")
+    print("Answer the following questions and test your knowledge.")
+
+def present_quiz_questions(questions):
+    score = 0
+    for question in questions:
+        print("\n" + question["question"])
+        for choice in question["choices"]:
+            print(choice)
+        
+        user_answer = input("Your answer (enter the letter corresponding to your choice): ").upper()
+
+        if user_answer == question["correct_answer"]:
+            print("Correct!")
+            score += 1
+        else:
+            print(f"Incorrect. The correct answer is {question['correct_answer']}.")
+
+    return score
+
+def display_final_results(score, total_questions):
+    print(f"\nQuiz completed! Your final score is: {score}/{total_questions}")
+    print("Thanks for playing!")
+
+def play_quiz_game():
+    questions = load_quiz_questions()
+    total_questions = len(questions)
+
+    display_welcome_message()
+
+    while True:
+        # Shuffle the questions for variety
+        random.shuffle(questions)
+        
+        # Present and evaluate quiz questions
+        user_score = present_quiz_questions(questions)
+        
+        # Display final results
+        display_final_results(user_score, total_questions)
+
+        play_again = input("Do you want to play again? (yes/no): ").lower()
+        if play_again != 'yes':
+            print("Goodbye!")
+            break
+
+# Call the function to run the quiz game
+play_quiz_game()
